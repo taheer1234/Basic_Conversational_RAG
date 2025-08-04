@@ -52,13 +52,14 @@ retrieved_docs_prompt = ChatPromptTemplate.from_messages(retrieved_docs_template
 
 format_retrieved_docs_prompt = RunnableLambda(lambda x: retrieved_docs_prompt.invoke({"context":x, "history":f"{chat_history}", "query":f"{query}"}))
 
+chain = new_question_prompt | model | StrOutputParser() | retriever | format_retrieved_docs_prompt | model | StrOutputParser()
+
 chat_history = []
 # This part makes up the Conversational RAG chatbot part of the script.
 while True:
     query = input("What would you like to know? ")
     if query.lower() == "exit":
         break
-    chain = new_question_prompt | model | StrOutputParser() | retriever | format_retrieved_docs_prompt | model | StrOutputParser()
     response = chain.invoke({"history":f"{chat_history}","query":f"{query}"})
     chat_history.append(HumanMessage(query))
     chat_history.append(AIMessage(response))

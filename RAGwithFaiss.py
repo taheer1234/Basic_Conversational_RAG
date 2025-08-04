@@ -19,7 +19,7 @@ docs = loader.load()
 splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=0)
 docs = splitter.split_documents(docs)
 
-print("Initializing Datastore...")
+print("Initializing Database...")
 # index = faiss.IndexFlatL2(len(embedding_model.embed_query("hello")))
 vector_store = FAISS.from_documents(docs, embedding=embedding_model)
 print("Initialized Database!")

@@ -1,6 +1,5 @@
 import os
 from langchain_community.vectorstores import FAISS
-from langchain.chains.retrieval_qa.base import BaseRetrievalQA
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
